@@ -32,14 +32,20 @@
 					<td th:text="${user.email}"></td>
 					<td th:text="${user.phone}"></td>
 					<td th:text="${user.address}"></td>
-					<td th:text="${user.status}"></td>
+					
+					<td>
+					     <span th:classappend="${user.status == T(com.crud.springboot.entity.UserStatus).ACTIVE ? 'badge bg-success' : 
+					     (user.status == T(com.crud.springboot.entity.UserStatus).INACTIVE ? 'badge bg-danger' : 'badge bg-secondary')}"
+					     th:text="${user.status}"></span>
+					</td>
+					 
 					<td th:text="${user.createdAt.toString().substring(0, 10)}"></td>
 						 
 					<td style="white-space:nowrap">
 						<a class="btn btn-primary btn-sm" 
-						href="@{/users/edit{id=${user.id}}}">Edit</a>
+						th:href="@{/users/edit(id=${user.id})}">Edit</a>
 						<a class="btn btn-danger btn-sm" 
-						href="@{/users/delete{id=${user.id}}}" 
+						th:href="@{/users/delete(id=${user.id})}"
 						onclick="return confirm('Are you sure?')">Delete</a>
 					</td>
 				</tr>
